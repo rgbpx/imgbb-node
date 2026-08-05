@@ -52,7 +52,8 @@
     "fmt:check": "oxfmt --check",
     "test": "vitest run --project unit",
     "test:integration": "vitest run --project integration",
-    "build": "tsdown"
+    "build": "tsdown",
+    "release": "release-it"
   },
   "devDependencies": {
     "@arethetypeswrong/core": "^0.18.5",
