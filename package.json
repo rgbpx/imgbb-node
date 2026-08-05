@@ -34,12 +34,13 @@
     "README.md"
   ],
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
   },
@@ -49,16 +50,19 @@
     "lint:fix": "oxlint --fix ./src",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --project unit",
-    "test:integration": "vitest run --project integration"
+    "test:integration": "vitest run --project integration",
+    "build": "tsdown"
   },
   "devDependencies": {
+    "@arethetypeswrong/core": "^0.18.5",
     "@tsconfig/node20": "^20.0.0",
     "@types/node": "^20.0.0",
     "oxfmt": "^0.62.0",
     "oxlint": "^1.77.0",
     "oxlint-tsgolint": "^7.0.2001",
+    "publint": "^0.3.23",
+    "tsdown": "^0.22.14",
     "typescript": "^7.0.0",
     "vitest": "^4.1.10"
   },
