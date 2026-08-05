@@ -45,6 +45,8 @@
   },
   "scripts": {
     "typecheck": "tsc",
+    "lint": "oxlint ./src",
+    "lint:fix": "oxlint --fix ./src",
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --project unit",
     "test:integration": "vitest run --project integration"
