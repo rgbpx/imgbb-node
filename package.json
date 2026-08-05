@@ -31,5 +31,10 @@
   "engines": {
     "bun": ">=1.0.36",
     "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node20": "^20.0.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^7.0.0"
   }
 }
