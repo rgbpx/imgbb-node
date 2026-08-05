@@ -28,13 +28,17 @@
     "type": "git",
     "url": "git+https://github.com/rgbpx/imgbb-node.git"
   },
-  "engines": {
-    "bun": ">=1.0.36",
-    "node": ">=20.0.0"
+  "scripts": {
+    "typecheck": "tsc",
+    "build": "tsc -p tsconfig.build.json"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.0.0",
     "@types/node": "^20.0.0",
     "typescript": "^7.0.0"
+  },
+  "engines": {
+    "bun": ">=1.0.36",
+    "node": ">=20.0.0"
   }
 }
