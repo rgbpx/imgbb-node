@@ -1,0 +1,35 @@
+{
+  "name": "imgbb-node",
+  "version": "0.0.0",
+  "description": "Lightweight ImgBB client for Node.js (and Bun) written in TypeScript with zero dependencies",
+  "keywords": [
+    "api",
+    "bun",
+    "imgbb",
+    "client",
+    "javascript",
+    "library",
+    "node",
+    "nodejs",
+    "typescript"
+  ],
+  "homepage": "https://github.com/rgbpx/imgbb-node#readme",
+  "bugs": {
+    "url": "https://github.com/rgbpx/imgbb-node/issues",
+    "email": "rgbpx@proton.me"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "rgbpx",
+    "email": "rgbpx@proton.me",
+    "url": "https://github.com/rgbpx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rgbpx/imgbb-node.git"
+  },
+  "engines": {
+    "bun": ">=1.0.36",
+    "node": ">=20.0.0"
+  }
+}
