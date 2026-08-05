@@ -1,0 +1,69 @@
+{
+  "$schema": "./node_modules/release-it/schema/release-it.json",
+  "git": {
+    "releaseName": "${version}",
+    "tagName": "${version}",
+    "commitMessage": "chore: release ${version}"
+  },
+  "github": {
+    "release": true
+  },
+  "npm": {
+    "publish": true,
+    "skipChecks": true
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "bumpStrict": true,
+      "infile": "CHANGELOG.md",
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          {
+            "type": "feat",
+            "section": "Features"
+          },
+          {
+            "type": "fix",
+            "section": "Bug Fixes"
+          },
+          {
+            "type": "docs",
+            "section": "Documentation",
+            "effect": "changelog"
+          },
+          {
+            "type": "style",
+            "section": "Style",
+            "effect": "changelog"
+          },
+          {
+            "type": "perf",
+            "section": "Performance",
+            "effect": "changelog"
+          },
+          {
+            "type": "test",
+            "effect": "hidden"
+          },
+          {
+            "type": "refactor",
+            "effect": "hidden"
+          },
+          {
+            "type": "build",
+            "effect": "hidden"
+          },
+          {
+            "type": "ci",
+            "effect": "hidden"
+          },
+          {
+            "type": "chore",
+            "effect": "hidden"
+          }
+        ]
+      }
+    }
+  }
+}
