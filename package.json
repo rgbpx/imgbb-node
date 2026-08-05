@@ -49,9 +49,9 @@
     "lint:fix": "oxlint --fix ./src",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --project unit",
-    "test:integration": "vitest run --project integration"
+    "test:integration": "vitest run --project integration",
+    "build": "tsdown"
   },
   "devDependencies": {
     "@arethetypeswrong/core": "^0.18.5",
