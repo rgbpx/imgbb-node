@@ -16,3 +16,17 @@ Lightweight ImgBB client for Node.js (and Bun) written in TypeScript with zero d
 
 - Node.js version: `>= 20` (Apr 17, 2023)
 - Bun version: `>= 1.0.36` (Mar 29, 2024)
+
+## Installation
+
+Install the package via `npm`:
+
+```sh
+npm install imgbb-node
+```
+
+Install the package via `bun`:
+
+```sh
+bun add imgbb-node
+```
