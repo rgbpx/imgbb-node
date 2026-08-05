@@ -11,3 +11,8 @@
 # imgbb-node
 
 Lightweight ImgBB client for Node.js (and Bun) written in TypeScript with zero dependencies
+
+## Requirements
+
+- Node.js version: `>= 20` (Apr 17, 2023)
+- Bun version: `>= 1.0.36` (Mar 29, 2024)
