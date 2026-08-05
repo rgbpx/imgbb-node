@@ -5,8 +5,8 @@
   "keywords": [
     "api",
     "bun",
-    "imgbb",
     "client",
+    "imgbb",
     "javascript",
     "library",
     "node",
@@ -45,6 +45,10 @@
   },
   "scripts": {
     "typecheck": "tsc",
+    "lint": "oxlint ./src",
+    "lint:fix": "oxlint --fix ./src",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --project unit",
     "test:integration": "vitest run --project integration"
@@ -52,6 +56,9 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.0.0",
     "@types/node": "^20.0.0",
+    "oxfmt": "^0.62.0",
+    "oxlint": "^1.77.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "typescript": "^7.0.0",
     "vitest": "^4.1.10"
   },
