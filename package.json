@@ -45,7 +45,9 @@
   },
   "scripts": {
     "typecheck": "tsc",
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run --project unit",
+    "test:integration": "vitest run --project integration"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.0.0",
