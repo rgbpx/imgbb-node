@@ -47,6 +47,8 @@
     "typecheck": "tsc",
     "lint": "oxlint ./src",
     "lint:fix": "oxlint --fix ./src",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
     "build": "tsc -p tsconfig.build.json",
     "test": "vitest run --project unit",
     "test:integration": "vitest run --project integration"
