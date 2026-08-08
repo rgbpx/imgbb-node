@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { uploadFile, uploadBase64 } from "@src/lib/imgbb.js";
+import { uploadFile, uploadBase64, uploadUrl } from "@src/lib/imgbb.js";
 
 const key = process.env.IMGBB_API_KEY as string;
 
@@ -132,6 +132,64 @@ describe("ImgBB Integration", () => {
       const mockErrorMessage = "Invalid base64 string.";
 
       const resultPromise = uploadBase64(base64, { key });
+
+      await expect(resultPromise).rejects.toThrow(
+        `HTTP ${mockStatusCode} ${mockStatusText} ImgBB ${mockErrorCode} ${mockErrorMessage}`
+      );
+    });
+  });
+
+  describe("uploadUrl", () => {
+    it.concurrent("should return result", async () => {
+      const expiration = 60;
+      const name = "imgbb";
+      const extension = "png";
+      const filename = `${name}.${extension}`;
+      const mime = `image/${extension}`;
+      const url = "https://simgbb.com/images/favicon.png";
+
+      const result = await uploadUrl(url, { key, name, expiration });
+
+      expect(result.data.title).toContain(name);
+      expect(result.data.url).toContain(filename);
+      expect(result.data.display_url).toContain(filename);
+      expect(result.data.expiration).toBe(expiration);
+      expect(result.data.image.filename).toBe(filename);
+      expect(result.data.image.name).toBe(name);
+      expect(result.data.image.mime).toBe(mime);
+      expect(result.data.image.extension).toBe(extension);
+      expect(result.data.image.url).toContain(filename);
+      expect(result.data.image.filename).toBe(filename);
+      expect(result.data.thumb.name).toBe(name);
+      expect(result.data.thumb.mime).toBe(mime);
+      expect(result.data.thumb.extension).toBe(extension);
+      expect(result.data.thumb.url).toContain(filename);
+      expect(result.success).toBe(true);
+      expect(result.status).toBe(200);
+    });
+
+    it.concurrent("should throw invalid file type error", async () => {
+      const url = "https://google.com/favicon.ico";
+      const mockStatusCode = 400;
+      const mockStatusText = "Bad Request";
+      const mockErrorCode = 105;
+      const mockErrorMessage = "Invalid file type";
+
+      const resultPromise = uploadUrl(url, { key });
+
+      await expect(resultPromise).rejects.toThrow(
+        `HTTP ${mockStatusCode} ${mockStatusText} ImgBB ${mockErrorCode} ${mockErrorMessage}`
+      );
+    });
+
+    it.concurrent("should throw network error", async () => {
+      const url = "https://example.com/file.jpeg";
+      const mockStatusCode = 400;
+      const mockStatusText = "Bad Request";
+      const mockErrorCode = 105;
+      const mockErrorMessage = "Can't download remote image [ 404 ]";
+
+      const resultPromise = uploadUrl(url, { key });
 
       await expect(resultPromise).rejects.toThrow(
         `HTTP ${mockStatusCode} ${mockStatusText} ImgBB ${mockErrorCode} ${mockErrorMessage}`
