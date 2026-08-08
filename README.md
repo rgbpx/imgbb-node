@@ -37,10 +37,19 @@ bun add imgbb-node
 
 ## Documentation
 
+- [API Key](#api-key)
 - [File Upload](#file-upload)
 - [Types](#types)
 
 ---
+
+### API key
+
+To upload files to ImgBB, you need to obtain an API key:
+
+1. Create a free account at [ImgBB Sign Up](https://imgbb.com/signup) page.
+2. Go to the [ImgBB API](https://api.imgbb.com/) page.
+3. Generate API key by clicking `Add API key` button.
 
 ### File Upload
 
