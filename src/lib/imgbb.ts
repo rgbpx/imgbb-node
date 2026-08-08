@@ -7,6 +7,8 @@ import {
   appendFile,
   assertBase64,
   appendBase64,
+  assertUrl,
+  appendUrl,
 } from "../payload.js";
 
 const upload = async (payload: FormData, options: ImgBBUploadOptions): Promise<ImgBBResult> => {
@@ -121,6 +123,50 @@ export const uploadBase64 = async (
   const base64Trimmed = base64.trim();
   assertBase64(base64Trimmed);
   appendBase64(payload, base64Trimmed);
+
+  const result = await upload(payload, options);
+
+  return result;
+};
+
+/**
+ * Uploads file to ImgBB from a URL `string`.
+ *
+ * Allowed mime types: `image/*`, `application/pdf`, `application/postscript`.
+ *
+ * But some image mime types are not allowed, some are broken and some get converted to other
+ * formats (mostly JPEG).
+ *
+ * Provide ImgBB API `key` in `options`.
+ *
+ * Use `signal` for the timeout/retries logic.
+ *
+ * @example
+ *   const imageUrl = "https://example.com/image.jpg";
+ *   const controller = new AbortController();
+ *   setTimeout(() => controller.abort(), 5_000); // abort after 5 seconds
+ *
+ *   const {
+ *     data: { url },
+ *   } = await uploadUrl(imageUrl, {
+ *     key: "MY_IMGBB_API_KEY",
+ *     name: "my_url_image",
+ *     expiration: 60,
+ *     signal: controller.signal,
+ *   });
+ *
+ * @param url URL `string` to upload. Remote file size must be less than `32 MB`.
+ * @param options Options for the upload. See {@link ImgBBUploadOptions} for more details.
+ *
+ * @returns ImgBB upload result. See {@link ImgBBResult} for more details.
+ * @throws For invalid inputs or upload failures and error responses.
+ */
+export const uploadUrl = async (url: string, options: ImgBBUploadOptions): Promise<ImgBBResult> => {
+  const payload = createUploadPayload(options);
+
+  const urlTrimmed = url.trim();
+  assertUrl(urlTrimmed);
+  appendUrl(payload, urlTrimmed);
 
   const result = await upload(payload, options);
 

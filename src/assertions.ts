@@ -61,3 +61,9 @@ export const assertDoesNotMatchAnyOf = <T>(
     !items.some(item => predicate(value, item)),
     new Error(`${label} ("${value}") must not match any of: ${items.join(", ")}.`)
   );
+
+export const assertIncludes = (value: string, substring: string, label: string = "Value"): void =>
+  assert(
+    value.includes(substring),
+    new Error(`${label} ("${value}") must include "${substring}".`)
+  );

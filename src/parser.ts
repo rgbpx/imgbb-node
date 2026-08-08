@@ -26,3 +26,15 @@ export const parseSuccessResponse = async (response: Response): Promise<ImgBBRes
 
   return data;
 };
+
+export const parseUrl = (url: string, label: string = "URL"): URL => {
+  try {
+    const parsedUrl = new URL(url);
+
+    return parsedUrl;
+  } catch (err) {
+    throw new Error(`${label} ("${url}") is not a valid URL.`, {
+      cause: err,
+    });
+  }
+};

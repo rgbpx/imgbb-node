@@ -10,7 +10,7 @@ import {
   MIN_EXPIRATION_SECONDS,
   UNSUPPORTED_MIME_TYPES,
 } from "@src/constants.js";
-import { uploadFile, uploadBase64 } from "@src/lib/imgbb.js";
+import { uploadFile, uploadBase64, uploadUrl } from "@src/lib/imgbb.js";
 
 describe("ImgBB Unit", () => {
   afterEach(() => {
@@ -356,6 +356,144 @@ describe("ImgBB Unit", () => {
 
       await expect(resultPromise).rejects.toThrow(
         `base64 image ("${base64}") must not start with "data:".`
+      );
+    });
+  });
+
+  describe("uploadUrl", () => {
+    it.concurrent("should return success response", async () => {
+      const mockKey = randomUUID().replaceAll("-", "");
+      const url = "https://example.com/imageFilename.png";
+      const mockResult: ImgBBResult = {
+        data: {
+          id: "Bl4h6LaH",
+          title: "imageFilename",
+          url_viewer: "https://ibb.co/Bl4h6LaH",
+          url: "https://i.ibb.co/6lAHbl4h/imageFilename.png",
+          display_url: "https://i.ibb.co/614hBlah/imageFilename.png",
+          width: 2343,
+          height: 3237,
+          size: 1337,
+          time: Date.now(),
+          expiration: 0,
+          image: {
+            filename: "imageFilename.png",
+            name: "imageFilename",
+            mime: "image/png",
+            extension: "png",
+            url: "https://i.ibb.co/6lAHbl4h/imageFilename.png",
+          },
+          thumb: {
+            filename: "imageFilename.png",
+            name: "imageFilename",
+            mime: "image/png",
+            extension: "png",
+            url: "https://i.ibb.co/Bl4h6LaH/imageFilename.png",
+          },
+          medium: {
+            filename: "imageFilename.png",
+            name: "imageFilename",
+            mime: "image/png",
+            extension: "png",
+            url: "https://i.ibb.co/614hBlah/imageFilename.png",
+          },
+          delete_url: `https://ibb.co/Bl4h6LaH/${randomUUID().replaceAll("-", "")}`,
+        },
+        success: true,
+        status: 200,
+      };
+      const mockResultJson = JSON.stringify(mockResult);
+      const mockResultLength = mockResultJson.length;
+      const mockResponse = new Response(mockResultJson, {
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": mockResultLength.toString(),
+        },
+      });
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      fetchSpy.mockResolvedValueOnce(mockResponse);
+
+      const resultPromise = uploadUrl(url, { key: mockKey });
+
+      await expect(resultPromise).resolves.toStrictEqual(mockResult);
+    });
+
+    it.concurrent("should throw ImgBB error", async () => {
+      const mockKey = randomUUID().replaceAll("-", "");
+      const url = "https://example.com/imageFilename.png";
+      const mockStatusCode = 400;
+      const mockStatusText = "Bad Request";
+      const mockErrorCode = 103;
+      const mockErrorMessage = "You have been forbidden to use this website.";
+      const mockError: ImgBBError = {
+        status_code: mockStatusCode,
+        error: {
+          message: mockErrorMessage,
+          code: mockErrorCode,
+        },
+        status_txt: mockStatusText,
+      };
+      const mockErrorJson = JSON.stringify(mockError);
+      const mockErrorLength = mockErrorJson.length;
+      const mockResponse = new Response(mockErrorJson, {
+        status: mockStatusCode,
+        statusText: mockStatusText,
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": mockErrorLength.toString(),
+        },
+      });
+      const fetchSpy = vi.spyOn(globalThis, "fetch");
+      fetchSpy.mockResolvedValueOnce(mockResponse);
+
+      const resultPromise = uploadUrl(url, { key: mockKey });
+
+      await expect(resultPromise).rejects.toThrow(
+        `HTTP ${mockStatusCode} ${mockStatusText} ImgBB ${mockErrorCode} ${mockErrorMessage}`
+      );
+    });
+
+    it.concurrent("should throw if image url length is zero", async () => {
+      const mockKey = randomUUID().replaceAll("-", "");
+      const url = "";
+
+      const resultPromise = uploadUrl(url, { key: mockKey });
+
+      await expect(resultPromise).rejects.toThrow(
+        `image url length (${url.length}) must be greater than 0.`
+      );
+    });
+
+    it.concurrent("should throw if image url is invalid", async () => {
+      const mockKey = randomUUID().replaceAll("-", "");
+      const url = "@";
+
+      const resultPromise = uploadUrl(url, { key: mockKey });
+
+      await expect(resultPromise).rejects.toThrow(`image url ("${url}") is not a valid URL.`);
+    });
+
+    it.concurrent("should throw if image url protocol is not http(s)", async () => {
+      const mockKey = randomUUID().replaceAll("-", "");
+      const protocol = "ftp:";
+      const url = `${protocol}example.com/image.jpg`;
+
+      const resultPromise = uploadUrl(url, { key: mockKey });
+
+      await expect(resultPromise).rejects.toThrow(
+        `image url protocol ("${protocol}") must match one of: http, https.`
+      );
+    });
+
+    it.concurrent("should throw if image url hostname is not top-level", async () => {
+      const mockKey = randomUUID().replaceAll("-", "");
+      const hostname = "localhost";
+      const url = `http://${hostname}/image.jpg`;
+
+      const resultPromise = uploadUrl(url, { key: mockKey });
+
+      await expect(resultPromise).rejects.toThrow(
+        `image url hostname ("${hostname}") must include ".".`
       );
     });
   });
