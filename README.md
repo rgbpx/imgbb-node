@@ -34,3 +34,33 @@ Install the package via `bun`:
 ```sh
 bun add imgbb-node
 ```
+
+## Documentation
+
+- [File Upload](#file-upload)
+
+---
+
+### File Upload
+
+Uploads a file to ImgBB from a `File`.
+
+Throws for invalid inputs or upload failures and error responses.
+
+```js
+import { uploadFile } from "imgbb-node";
+
+const data = await readFile("/path/to/image.jpeg");
+const file = new File([data], "image.jpeg", { type: "image/jpeg" });
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5_000); // abort after 5 seconds
+
+const {
+  data: { url },
+} = await uploadFile(file, {
+  key: "MY_IMGBB_API_KEY",
+  name: "my_file_image",
+  expiration: 60,
+  signal: controller.signal,
+});
+```
