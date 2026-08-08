@@ -38,6 +38,7 @@ bun add imgbb-node
 ## Documentation
 
 - [File Upload](#file-upload)
+- [Types](#types)
 
 ---
 
@@ -63,4 +64,18 @@ const {
   expiration: 60,
   signal: controller.signal,
 });
+```
+
+### Types
+
+`imgbb-node/types` - sub-module with exported types.
+
+```js
+import type {
+  ImgBBUploadOptions,
+  ImgBBParams,
+  ImgBBImage,
+  ImgBBResult,
+  ImgBBError,
+} from "imgbb-node/types";
 ```
