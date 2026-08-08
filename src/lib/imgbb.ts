@@ -76,6 +76,42 @@ export const uploadFile = async (file: File, options: ImgBBUploadOptions): Promi
   return result;
 };
 
+/**
+ * Uploads file to ImgBB from a base64 `string`.
+ *
+ * Make sure to provide a valid base64 string without URI (e.g. without `data:image/jpeg;base64,`
+ * metadata prefix).
+ *
+ * Allowed mime types: `image/*`, `application/pdf`, `application/postscript`.
+ *
+ * But some image mime types are not allowed, some are broken and some get converted to other
+ * formats (mostly JPEG).
+ *
+ * Provide ImgBB API `key` in `options`.
+ *
+ * Use `signal` for the timeout/retries logic.
+ *
+ * @example
+ *   const base64 =
+ *     "Qk1EAAAAAAAAAD4AAAAoAAAAAQAAAAEAAAABAAEAAAAAAAYAAAASCwAAEgsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+ *   const controller = new AbortController();
+ *   setTimeout(() => controller.abort(), 5_000); // abort after 5 seconds
+ *
+ *   const {
+ *     data: { url },
+ *   } = await uploadBase64(base64, {
+ *     key: "MY_IMGBB_API_KEY",
+ *     name: "my_base64_image",
+ *     expiration: 60,
+ *     signal: controller.signal,
+ *   });
+ *
+ * @param base64 Base64 `string` to upload. Max size is `32 MB`.
+ * @param options Options for the upload. See {@link ImgBBUploadOptions} for more details.
+ *
+ * @returns ImgBB upload result. See {@link ImgBBResult} for more details.
+ * @throws For invalid inputs or upload failures and error responses.
+ */
 export const uploadBase64 = async (
   base64: string,
   options: ImgBBUploadOptions
