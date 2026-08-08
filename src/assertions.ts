@@ -24,6 +24,16 @@ export const assertLessThanOrEqual = (value: number, max: number, label: string 
 export const assertEqualTo = (value: number, expected: number, label: string = "Value"): void =>
   assert(value === expected, new RangeError(`${label} (${value}) must be equal to ${expected}.`));
 
+export const assertDoesNotStartWith = (
+  value: string,
+  prefix: string,
+  label: string = "Value"
+): void =>
+  assert(
+    !value.startsWith(prefix),
+    new Error(`${label} ("${value}") must not start with "${prefix}".`)
+  );
+
 export const assertIsAlphanumeric = (value: string, label: string = "Value"): void =>
   assert(
     /^[a-z0-9]+$/.test(value),

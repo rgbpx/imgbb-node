@@ -1,6 +1,7 @@
 import type { ImgBBParams } from "./lib/types.js";
 import {
   assertDoesNotMatchAnyOf,
+  assertDoesNotStartWith,
   assertEqualTo,
   assertGreaterThan,
   assertGreaterThanOrEqual,
@@ -49,12 +50,19 @@ export const assertFile = (file: File): void => {
   );
 };
 
+export const assertBase64 = (base64: string): void => {
+  assertGreaterThan(base64.length, 0, "base64 image length");
+  assertDoesNotStartWith(base64, "data:", "base64 image");
+};
+
 const appendKey = (payload: FormData, key: string): void => payload.append("key", key);
 const appendName = (payload: FormData, name: string): void => payload.append("name", name);
 const appendExpiration = (payload: FormData, expiration: number): void =>
   payload.append("expiration", expiration);
 
 export const appendFile = (payload: FormData, file: File): void => payload.append("image", file);
+export const appendBase64 = (payload: FormData, base64: string): void =>
+  payload.append("image", base64);
 
 export const createUploadPayload = ({ key, name, expiration }: ImgBBParams): FormData => {
   const payload = new FormData();
