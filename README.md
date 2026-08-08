@@ -40,6 +40,7 @@ bun add imgbb-node
 - [API Key](#api-key)
 - [File Upload](#file-upload)
 - [Types](#types)
+- [Supported Formats](#supported-formats)
 - [Development](#development)
 
 ---
@@ -89,6 +90,14 @@ import type {
   ImgBBError,
 } from "imgbb-node/types";
 ```
+
+### Supported Formats
+
+Allowed mime types:
+
+- `image/*`
+- `application/pdf`
+- `application/postscript`.
 
 ### Development
 
