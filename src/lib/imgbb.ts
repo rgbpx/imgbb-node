@@ -1,7 +1,13 @@
 import type { ImgBBResult, ImgBBUploadOptions } from "./types.js";
 import { API_ENDPOINT, USER_AGENT } from "../constants.js";
 import { parseErrorResponse, parseSuccessResponse } from "../parser.js";
-import { appendFile, assertFile, createUploadPayload } from "../payload.js";
+import {
+  createUploadPayload,
+  assertFile,
+  appendFile,
+  assertBase64,
+  appendBase64,
+} from "../payload.js";
 
 const upload = async (payload: FormData, options: ImgBBUploadOptions): Promise<ImgBBResult> => {
   const response = await fetch(API_ENDPOINT, {
@@ -64,6 +70,21 @@ export const uploadFile = async (file: File, options: ImgBBUploadOptions): Promi
 
   assertFile(file);
   appendFile(payload, file);
+
+  const result = await upload(payload, options);
+
+  return result;
+};
+
+export const uploadBase64 = async (
+  base64: string,
+  options: ImgBBUploadOptions
+): Promise<ImgBBResult> => {
+  const payload = createUploadPayload(options);
+
+  const base64Trimmed = base64.trim();
+  assertBase64(base64Trimmed);
+  appendBase64(payload, base64Trimmed);
 
   const result = await upload(payload, options);
 
