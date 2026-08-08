@@ -142,13 +142,13 @@ export const uploadBase64 = async (
  * Use `signal` for the timeout/retries logic.
  *
  * @example
- *   const url = "https://example.com/image.jpg";
+ *   const imageUrl = "https://example.com/image.jpg";
  *   const controller = new AbortController();
  *   setTimeout(() => controller.abort(), 5_000); // abort after 5 seconds
  *
  *   const {
  *     data: { url },
- *   } = await uploadUrl(url, {
+ *   } = await uploadUrl(imageUrl, {
  *     key: "MY_IMGBB_API_KEY",
  *     name: "my_url_image",
  *     expiration: 60,
