@@ -5,6 +5,7 @@ import {
   assertEqualTo,
   assertGreaterThan,
   assertGreaterThanOrEqual,
+  assertIncludes,
   assertIsAlphanumeric,
   assertLessThanOrEqual,
   assertMatchesOneOf,
@@ -18,6 +19,7 @@ import {
   MIN_EXPIRATION_SECONDS,
   UNSUPPORTED_MIME_TYPES,
 } from "./constants.js";
+import { parseUrl } from "./parser.js";
 
 const assertKey = (key: string): void => {
   assertEqualTo(key.length, API_KEY_LENGTH, "api key length");
@@ -55,11 +57,25 @@ export const assertBase64 = (base64: string): void => {
   assertDoesNotStartWith(base64, "data:", "base64 image");
 };
 
+export const assertUrl = (url: string): void => {
+  assertGreaterThan(url.length, 0, "image url length");
+
+  const parsedUrl = parseUrl(url, "image url");
+  assertIncludes(parsedUrl.hostname, ".", "image url hostname");
+  assertMatchesOneOf(
+    parsedUrl.protocol,
+    ["http", "https"],
+    (proto, allowedProto) => proto.startsWith(allowedProto),
+    "image url protocol"
+  );
+};
+
 const appendKey = (payload: FormData, key: string): void => payload.append("key", key);
 const appendName = (payload: FormData, name: string): void => payload.append("name", name);
 const appendExpiration = (payload: FormData, expiration: number): void =>
   payload.append("expiration", expiration);
 
+export const appendUrl = (payload: FormData, url: string): void => payload.append("image", url);
 export const appendFile = (payload: FormData, file: File): void => payload.append("image", file);
 export const appendBase64 = (payload: FormData, base64: string): void =>
   payload.append("image", base64);

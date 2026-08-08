@@ -7,6 +7,8 @@ import {
   appendFile,
   assertBase64,
   appendBase64,
+  assertUrl,
+  appendUrl,
 } from "../payload.js";
 
 const upload = async (payload: FormData, options: ImgBBUploadOptions): Promise<ImgBBResult> => {
@@ -121,6 +123,18 @@ export const uploadBase64 = async (
   const base64Trimmed = base64.trim();
   assertBase64(base64Trimmed);
   appendBase64(payload, base64Trimmed);
+
+  const result = await upload(payload, options);
+
+  return result;
+};
+
+export const uploadUrl = async (url: string, options: ImgBBUploadOptions): Promise<ImgBBResult> => {
+  const payload = createUploadPayload(options);
+
+  const urlTrimmed = url.trim();
+  assertUrl(urlTrimmed);
+  appendUrl(payload, urlTrimmed);
 
   const result = await upload(payload, options);
 
