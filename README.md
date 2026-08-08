@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="assets/imgbb-node.png">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/imgbb-node-dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/imgbb-node-light.png">
+    <img alt="imgbb-node" src="assets/imgbb-node-dark.png">
+  </picture>
 </p>
 
 ![NPM Version](https://img.shields.io/npm/v/imgbb-node)
