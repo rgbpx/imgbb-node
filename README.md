@@ -40,6 +40,7 @@ bun add imgbb-node
 - [API Key](#api-key)
 - [File Upload](#file-upload)
 - [Base64 Upload](#base64-upload)
+- [URL Upload](#url-upload)
 - [Types](#types)
 - [Supported Formats](#supported-formats)
   - [Supported Image Formats](#supported-image-formats)
@@ -98,6 +99,29 @@ const {
 } = await uploadBase64(base64, {
   key: "MY_IMGBB_API_KEY",
   name: "my_base64_image",
+  expiration: 60,
+  signal: controller.signal,
+});
+```
+
+### URL Upload
+
+Uploads a file to ImgBB from a URL `string`.
+
+Throws for invalid inputs or upload failures and error responses.
+
+```js
+import { uploadUrl } from "imgbb-node";
+
+const imageUrl = "https://example.com/image.jpg";
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5_000); // abort after 5 seconds
+
+const {
+  data: { url },
+} = await uploadUrl(imageUrl, {
+  key: "MY_IMGBB_API_KEY",
+  name: "my_url_image",
   expiration: 60,
   signal: controller.signal,
 });
