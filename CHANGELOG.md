@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/rgbpx/imgbb-node/compare/0.1.0...0.2.0) (2026-08-08)
+
+### Features
+
+* add base64 upload ([1a75c8e](https://github.com/rgbpx/imgbb-node/commit/1a75c8edd6aad97cdb1e687092dfa0117ab5f75e))
+
+### Documentation
+
+* add base64 upload jsdoc ([d3f0e52](https://github.com/rgbpx/imgbb-node/commit/d3f0e52973b8320b80e1873f8eb199f7a7beb063))
+* add base64 upload section to readme ([098bdd1](https://github.com/rgbpx/imgbb-node/commit/098bdd1ff26014c99e6a35bca84505a53679846d))
+
 ## 0.1.0 (2026-08-08)
 
 ### Features
