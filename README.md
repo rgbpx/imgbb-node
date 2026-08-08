@@ -153,7 +153,7 @@ Allowed mime types:
 
 The API will accept most of the popular image formats.
 
-But it has some quirks - some image formats are not allowed, some are broken and some will get automatically converted to other formats (mostly to JPEG).
+But it has some quirks - some image formats are not allowed, some are broken, some will get automatically converted to other formats (mostly to JPEG) and some can be uploaded only using a specific upload method: [`File Upload`](#file-upload) / [`Base64 Upload`](#base64-upload) / [`URL Upload`](#url-upload).
 
 ### Development
 
