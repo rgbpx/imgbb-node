@@ -40,6 +40,7 @@ bun add imgbb-node
 - [API Key](#api-key)
 - [File Upload](#file-upload)
 - [Types](#types)
+- [Development](#development)
 
 ---
 
@@ -88,3 +89,7 @@ import type {
   ImgBBError,
 } from "imgbb-node/types";
 ```
+
+### Development
+
+To run integration tests locally, you need to set the `IMGBB_API_KEY` environment variable to your [ImgBB API key](#api-key) in `.env.test.local` file.
