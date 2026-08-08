@@ -8,6 +8,7 @@ export default defineConfig({
   },
   entry: {
     index: "./src/lib/imgbb.ts",
+    types: "./src/lib/types.ts",
   },
   exports: true,
   dts: true,
