@@ -7,7 +7,8 @@ export default defineConfig({
     profile: "node16",
   },
   entry: {
-    index: "./src/index.ts",
+    index: "./src/lib/imgbb.ts",
+    types: "./src/lib/types.ts",
   },
   exports: true,
   dts: true,
