@@ -41,6 +41,7 @@ bun add imgbb-node
 - [File Upload](#file-upload)
 - [Types](#types)
 - [Supported Formats](#supported-formats)
+  - [Supported Image Formats](#supported-image-formats)
 - [Development](#development)
 
 ---
@@ -97,7 +98,13 @@ Allowed mime types:
 
 - `image/*`
 - `application/pdf`
-- `application/postscript`.
+- `application/postscript`
+
+#### Supported Image Formats
+
+The API will accept most of the popular image formats.
+
+But it has some quirks - some image formats are not allowed, some are broken and some will get automatically converted to other formats (mostly to JPEG).
 
 ### Development
 
