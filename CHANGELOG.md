@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/rgbpx/imgbb-node/compare/0.2.0...0.3.0) (2026-08-08)
+
+### Features
+
+* add url upload ([e15a6b6](https://github.com/rgbpx/imgbb-node/commit/e15a6b62ed19803b7977857b76e27e4ddac5696c))
+
+### Documentation
+
+* add url upload jsdoc ([ad7936a](https://github.com/rgbpx/imgbb-node/commit/ad7936a3fcf4279a6f97fe8aa84652895d7e870c))
+* add url upload section to readme ([dcc7907](https://github.com/rgbpx/imgbb-node/commit/dcc7907ba5fde82e7c497ff651f79f1283c78484))
+* fix url upload jsdoc input variable name ([f487df9](https://github.com/rgbpx/imgbb-node/commit/f487df9b4f57eda86638f16a8de0d5cf1530ebe4))
+* update supported image formats sub-section in readme to mention ([ff98a89](https://github.com/rgbpx/imgbb-node/commit/ff98a8992cd8995140bb9f87736e1f32a12890db))
+
 ## [0.2.0](https://github.com/rgbpx/imgbb-node/compare/0.1.0...0.2.0) (2026-08-08)
 
 ### Features
