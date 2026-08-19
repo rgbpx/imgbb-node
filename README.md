@@ -63,6 +63,7 @@ Uploads a file to ImgBB from a `File`.
 Throws for invalid inputs or upload failures and error responses.
 
 ```js
+import { readFile } from "node:fs/promises";
 import { uploadFile } from "imgbb-node";
 
 const data = await readFile("/path/to/image.jpeg");
