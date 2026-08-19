@@ -6,7 +6,7 @@
   </picture>
 </p>
 
-![NPM Version](https://img.shields.io/npm/v/imgbb-node?logo=npm&logoColor=959DA5&labelColor=363d45&color=0FBF3E&label=version)
+![NPM Version](https://img.shields.io/npm/v/imgbb-node?logo=npm&logoColor=959DA5&labelColor=363d45)
 ![NPM Downloads](https://img.shields.io/npm/dw/imgbb-node?logo=npm&logoColor=959DA5&labelColor=363d45&color=0FBF3E)
 [![CI](https://github.com/rgbpx/imgbb-node/actions/workflows/ci.yml/badge.svg)](https://github.com/rgbpx/imgbb-node/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/rgbpx/imgbb-node/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/rgbpx/imgbb-node/actions/workflows/github-code-scanning/codeql)
@@ -63,6 +63,7 @@ Uploads a file to ImgBB from a `File`.
 Throws for invalid inputs or upload failures and error responses.
 
 ```js
+import { readFile } from "node:fs/promises";
 import { uploadFile } from "imgbb-node";
 
 const data = await readFile("/path/to/image.jpeg");
