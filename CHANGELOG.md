@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0](https://github.com/rgbpx/imgbb-node/compare/0.3.0...1.0.0) (2026-08-19)
+
+### ⚠ BREAKING CHANGES
+
+* first stable release
+
+* first stable release ([44db077](https://github.com/rgbpx/imgbb-node/commit/44db077fb114a2be5f3675b8604fe29a757988af))
+
+### Documentation
+
+* add missing read file import in readme file upload example ([f46b9f7](https://github.com/rgbpx/imgbb-node/commit/f46b9f72583b874b66f2972c09fed3d57d869ef1))
+* remove partial npm badge customization ([b29ca89](https://github.com/rgbpx/imgbb-node/commit/b29ca8924b0a59e204ab79ecaeb8c6a8e125a5e5))
+
 ## [0.3.0](https://github.com/rgbpx/imgbb-node/compare/0.2.0...0.3.0) (2026-08-08)
 
 ### Features
